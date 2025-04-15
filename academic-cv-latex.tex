@@ -1,0 +1,464 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Packages:
+\usepackage[
+    ignoreheadfoot, % set margins without considering header and footer
+    top=2 cm,       % separation between body and page edge from the top
+    bottom=2 cm,    % separation between body and page edge from the bottom
+    left=2 cm,      % separation between body and page edge from the left
+    right=2 cm,     % separation between body and page edge from the right
+    footskip=1.0 cm % separation between body and footer
+    % showframe % for debugging 
+]{geometry}
+
+\usepackage{titlesec}
+\usepackage{tabularx}  % for making tables with fixed width columns
+\usepackage{array}     % tabularx requires this
+\usepackage{multicol}
+\usepackage[dvipsnames]{xcolor} % for coloring text
+\definecolor{primaryColor}{RGB}{0, 79, 144} % define primary color
+\usepackage{enumitem}  % for customizing lists
+\usepackage{fontawesome5}
+\usepackage{amsmath}
+\usepackage[
+    pdftitle={Javier Marlega's CV},
+    pdfauthor={onlynayan},
+    pdfcreator={LaTeX with RenderCV},
+    colorlinks=true,
+    urlcolor=primaryColor
+]{hyperref}
+\usepackage[pscoord]{eso-pic}
+\usepackage{calc}
+\usepackage{bookmark}
+\usepackage{fontawesome5}
+% \usepackage[hidelinks]{hyperref}
+\usepackage{lastpage}
+\usepackage{changepage}
+\usepackage{paracol}
+\usepackage{ifthen}
+\usepackage{needspace}
+\usepackage{iftex}
+
+% Ensure that generate pdf is machine readable/ATS parsable:
+\ifPDFTeX
+    \input{glyphtounicode}
+    \pdfgentounicode=1
+    % \usepackage[T1]{fontenc} % this breaks sb2nov
+    \usepackage[utf8]{inputenc}
+    \usepackage{lmodern}
+\fi
+
+% Some settings:
+\AtBeginEnvironment{adjustwidth}{\partopsep0pt}
+\pagestyle{empty}
+\setcounter{secnumdepth}{0}
+\setlength{\parindent}{0pt}
+\setlength{\topskip}{0pt}
+\setlength{\columnsep}{0cm}
+
+\makeatletter
+\let\ps@customFooterStyle\ps@plain
+\patchcmd{\ps@customFooterStyle}{\thepage}{
+    \color{gray}\textit{\small Javier Marlega - Page \thepage{} of \pageref*{LastPage}}
+}{}{}
+\makeatother
+
+\pagestyle{customFooterStyle}
+
+\titleformat{\section}{\needspace{4\baselineskip}\bfseries\large}{}{0pt}{}[\vspace{1pt}\titlerule]
+
+\titlespacing{\section}{
+    -1pt
+}{
+    0.3 cm
+}{
+    0.2 cm
+}
+
+\renewcommand\labelitemi{$\circ$}
+
+\newenvironment{highlights}{
+    \begin{itemize}[
+        topsep=0.10 cm,
+        parsep=0.10 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=0.4 cm + 10pt
+    ]
+}{
+    \end{itemize}
+}
+
+\newenvironment{highlightsforbulletentries}{
+    \begin{itemize}[
+        topsep=0.10 cm,
+        parsep=0.10 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=10pt
+    ]
+}{
+    \end{itemize}
+}
+
+\newenvironment{onecolentry}{
+    \begin{adjustwidth}{
+        0.2 cm + 0.00001 cm
+    }{
+        0.2 cm + 0.00001 cm
+    }
+}{
+    \end{adjustwidth}
+}
+
+\newenvironment{twocolentry}[2][]{
+    \onecolentry
+    \def\secondColumn{#2}
+    \setcolumnwidth{\fill, 4.5 cm}
+    \begin{paracol}{2}
+}{
+    \switchcolumn \raggedleft \secondColumn
+    \end{paracol}
+    \endonecolentry
+}
+
+\newenvironment{header}{
+    \setlength{\topsep}{0pt}\par\kern\topsep\centering\linespread{1.5}
+}{
+    \par\kern\topsep
+}
+
+\newcommand{\placelastupdatedtext}{
+    \AddToShipoutPictureFG*{
+        \put(
+            \LenToUnit{\paperwidth-2 cm-0.2 cm+0.05cm},
+            \LenToUnit{\paperheight-1.0 cm}
+        )
+    }%
+}
+
+% Save the original href command:
+\let\hrefWithoutArrow\href
+
+% New command for external links:
+\renewcommand{\href}[2]{\hrefWithoutArrow{#1}{\ifthenelse{\equal{#2}{}}{ }{#2 }\raisebox{.15ex}{\footnotesize \faExternalLink*}}}
+
+\begin{document}
+    \newcommand{\AND}{\unskip
+        \cleaders\copy\ANDbox\hskip\wd\ANDbox
+        \ignorespaces
+    }
+    \newsavebox\ANDbox
+    \sbox\ANDbox{}
+
+    \placelastupdatedtext
+
+    \begin{header}
+        \textbf{\fontsize{24 pt}{24 pt}\selectfont Javier Marlega}
+
+        \vspace{0.2 cm}
+
+        \normalsize
+        \mbox{{\color{black}\footnotesize\faMapMarker*}\hspace*{0.15cm}Spain}%
+        \kern 0.25 cm%
+        \AND%
+        \kern 0.25 cm%
+        \mbox{\hrefWithoutArrow{mailto:youremail@yourdomain.com}{\color{black}{\footnotesize\faEnvelope[regular]}\hspace*{0.15cm}marlega@gmail.com}}%
+        \kern 0.25 cm%
+        \AND%
+        \kern 0.25 cm%
+        \mbox{\hrefWithoutArrow{https://www.linkedin.com/}{\color{black}{\footnotesize\faLinkedinIn}\hspace*{0.15cm}linkedin.com/in/marlegaontop}}%
+        \kern 0.25 cm%
+        \AND%
+        \kern 0.25 cm%
+        \mbox{{\color{black}\faGithub}\hspace*{0.15cm}\hrefWithoutArrow{https://github.com/}{\textcolor{black}{github.com/marlega}}}%
+        \kern 0.25 cm%
+        \AND%
+        \kern 0.25 cm%
+        \mbox{\hrefWithoutArrow{https://www.researchgate.net}{\color{black}{\faResearchgate\hspace*{0.15cm}researchgate.net/profile/Marlega}}}%
+        \kern 0.25 cm%
+        \AND%
+        \kern 0.25 cm%
+        \mbox{\hrefWithoutArrow{tel:+34xxxxxxx}{\color{black}{\footnotesize\faPhone*}\hspace*{0.15cm}+34 xx-xxxx}}%
+        \kern 0.25 cm%
+        \AND%
+        \kern 0.25 cm%
+    \end{header}
+
+    \vspace{0.3 cm - 0.3 cm}
+    
+    \section{Research Interest}
+
+    \begin{onecolentry}
+        Quantum umbrellas oscillate beneath the syntax of algorithmic parabolas, 
+        where neural teacups sip gradients of invisible entropy. Beneath the oscillatory 
+        whispers of pseudo-random tofu matrices, convolutional cloudfish align their semantic 
+        toothbrushes with the dialect of recursive bananas. Hyperparameter spaghetti untangles 
+        itself only in the presence of ethically ambiguous ice cubes, while data lakes shimmer 
+        with probabilistic ambiguity under the moon of backpropagated nostalgia.
+    \end{onecolentry}
+    
+    \vspace{0.05 cm}
+    
+    \section{Education}
+    
+    \begin{twocolentry}{
+        \textit{Feb 2016 – June 2021}}
+        \textbf{University of Ghibli}\\
+        \textit{B.Sc. in Engineering of Sandwiches}
+    \end{twocolentry}
+    
+    \vspace{0.10 cm}
+    
+    \begin{onecolentry}
+        \begin{highlights}
+            \item \textbf{GPA:} 3.XX/4.0
+            \item \textbf{Undergraduate Thesis:} \textit{Entropy-Aware Donut Detection Using Semi-Supervised Origami}
+            \item \textbf{Supervisor:} Dr. Samuel, Ph.D.
+        \end{highlights}
+    \end{onecolentry}
+    
+    \vspace{0.05 cm}
+    
+    % Inside your document:
+    \section*{Skills}
+    
+    \noindent
+    \begin{tabularx}{\textwidth}{@{}X X@{}}
+        \textbf{Galactic Toolchains} & \textbf{Vegetable Protocols} \\
+        \begin{highlights}
+            \item PhotonScript, BananaLang
+        \end{highlights} & 
+        \begin{highlights}
+            \item KaleBoard 3000, OnionLinker, ESP-Chili-420
+        \end{highlights} \\[-0.2em]
+    
+        \textbf{Waffle Intelligence APIs} & \textbf{Quantum Kitchenware} \\
+        \begin{highlights}
+            \item PyWaffle, NumCrumbs, Scikit-Batter, TensorToast
+        \end{highlights} & 
+        \begin{highlights}
+            \item PanNet, SpoonVision, SpatulaFlow
+        \end{highlights} \\[-0.2em]
+    \end{tabularx}
+    
+    \vspace{-1em} % <-- Reduce space below the skills section
+    \vspace{0.05 cm}
+    
+    \section{Publications}
+    
+    \begin{twocolentry}{
+        \textit{BananaCon}    
+        \textit{2027}}
+        \textbf{Z. Quantum}, \text{X. Umbrella}, \text{On the Wobble of Recursive Muffins}
+    
+        \footnotesize\textit{Proc. of Synthetic Systems, vol. 1, pp. 4} \\
+        \hrefWithoutArrow{https://doi.org/10.0000/wobble123}{\scriptsize \color{black} \textbf{DOI:} 10.0000/wobble123}
+    \end{twocolentry}
+    
+    \vspace{0.10 cm}
+    
+    \begin{onecolentry}
+        \begin{highlights}
+            \item Simulated muffin drift in low-noise universes
+            \item Applied frosting theory to chaotic entropy fields
+        \end{highlights}
+    \end{onecolentry}
+    
+    \vspace{0.1 cm}
+    
+    \begin{twocolentry}{
+        \textit{SockTech}    
+        \textit{2042}}
+        \textbf{B. Blender}, \text{Y. Crayon}, \text{Forecasting Penguins with Hula-Hoops}
+    
+        \footnotesize\textit{Elastic Modeling Conf., pp. 7--13} \\
+        \hrefWithoutArrow{https://doi.org/10.3141/penguins42}{\scriptsize \color{black} \textbf{DOI:} 10.3141/penguins42}
+    \end{twocolentry}
+    
+    \vspace{0.10 cm}
+    
+    \begin{onecolentry}
+        \begin{highlights}
+            \item Used bubble wrap to decode penguin migration
+            \item Developed time-aware hoop filters
+        \end{highlights}
+    \end{onecolentry}
+    
+    \vspace{0.2 cm}
+    
+    \begin{twocolentry}{
+        \textit{Nonsense Journal}    
+        \textit{3033}}
+        \textbf{L. Ducksworth}, \textbf{Q. Whiskers}, \text{Quantum Cheese Mapping in Hyperspace}
+    
+        \footnotesize\textit{Journal of Surreal Analytics, vol. 88, pp. 404--418} \\
+        \hrefWithoutArrow{http://dx.doi.org/10.0000/cheese88}{\scriptsize \color{black} \textbf{DOI:} 10.0000/cheese88}
+    \end{twocolentry}
+    
+    \vspace{0.10 cm}
+    
+    \begin{onecolentry}
+        \begin{highlights}
+            \item Mapped cheddar across multiverse grids
+            \item Modeled mozzarella spin states
+        \end{highlights}
+    \end{onecolentry}
+    
+    \vspace{0.05 cm}
+
+    \section{Industrial Attachment}
+    
+    \begin{twocolentry}{
+        \textit{Sep 2019 – Mar 2020}}
+        \textbf{Interdimensional Pancake Corporation (IPC)}
+    \end{twocolentry}
+    
+    \vspace{0.10 cm}
+    
+    \begin{onecolentry}
+        \begin{highlights}
+            \item \text Deployed waffle reactors using C\# and ToastScript
+            \item \text Optimized syrup flowcharts under existential deadlines
+        \end{highlights}
+    \end{onecolentry}
+    
+    \vspace{0.05 cm}
+    
+    \section*{Academic Courses}
+    
+    \vspace{-0.5em} % Reduce space after section title
+    
+    \begin{multicols}{3}
+        \begin{itemize}[left=0pt, label=•, itemsep=0.1em]
+            \item Advanced Sock Sorting Algorithms
+            \item Quantum Bubble Engineering
+            \item Intro to Toast Protocols
+            \item Applied Recursive Bananas
+            \item Theoretical Pillow Compression
+            \item Neural Networks for Talking Tom
+            \item Cryptographic Jellybean Analysis
+            \item Time Travel Debugging 101
+            \item AI for Waffle Recognition
+        \end{itemize}
+    \end{multicols}
+    
+    \vspace{-1em} % Reduce space before next section
+    
+    \vspace{0.05 cm}
+    
+    \section{Certifications \& Language Proficiency}
+    
+    \begin{onecolentry}
+        \begin{highlights}
+            \item \hrefWithoutArrow{https://example.com/fluffymetrics}{\color{black} Advanced Pillow Compression (SnoreLab)}
+            \item \hrefWithoutArrow{https://example.com/cheeseml}{\color{black} Intro to Melted Logic in Cheesebased Networks (MozzarellaTech)}
+            \item \hrefWithoutArrow{https://example.com/fogsyntax101}{\color{black} Foggy Syntax Parsing in Noisy Sandwich Environments (BLT Institute)}
+            \item \hrefWithoutArrow{https://example.com/spacebeans}{\color{black} Reactive Bean Classification with Quantum Forks (NebulaEd)}
+            \item Certified in Galactic Fluency: Level B2 in Martian English
+        \end{highlights}
+    \end{onecolentry}
+    
+    \vspace{0.05 cm}
+    
+    \section{Achievements}
+
+    \begin{twocolentry}{
+        \textit{2021}}
+        \text{International Toast Tossing Olympiad}
+    \end{twocolentry}
+    
+    \begin{onecolentry}
+        \begin{highlights}
+            \item Won 2nd place for aerodynamic jam distribution theory
+            \item Simulated bread trajectory under buttered conditions
+        \end{highlights}
+    \end{onecolentry}
+    
+    \vspace{0.2 cm}
+    
+    \begin{twocolentry}{
+        \textit{2017}}
+        \text{Recursive Banana Folding Bootcamp}
+    \end{twocolentry}
+    
+    \begin{onecolentry}
+        \begin{highlights}
+            \item Selected based on exceptional fruit-loop logic implementation
+            \item Trained under Grandmaster Orangutan in loop unpeeling techniques
+        \end{highlights}
+    \end{onecolentry}
+    
+    \vspace{0.05 cm}
+    
+    \section{Organizations}
+    
+    \begin{twocolentry}{
+        \textit{2019}}
+        \text{Society of Synchronized Duck Whisperers}
+    \end{twocolentry}
+    
+    \begin{onecolentry}
+        \textit{Chief Quack Strategist}
+        \begin{highlights}
+            \item Orchestrated telepathic seminars with aquatic participants
+            \item Performed ceremonial waddling at regional beak symposiums
+        \end{highlights}
+    \end{onecolentry}
+    
+    \vspace{0.2 cm}
+    
+    \begin{twocolentry}{
+        \textit{2019}}
+        \text{Annual Toast \& Syntax Fair}
+    \end{twocolentry}
+    
+    \begin{onecolentry}
+        \textit{Head of Crumb Logistics}
+        \begin{highlights}
+            \item Oversaw multiverse-level jam dispersion challenges
+            \item Facilitated multilingual sandwich debates
+        \end{highlights}
+    \end{onecolentry}
+    
+    \vspace{0.2 cm}
+    
+    \begin{twocolentry}{
+        \textit{2019}}
+        \text{Federation of Recursive Umbrella Engineers}
+    \end{twocolentry}
+    
+    \begin{onecolentry}
+        \textit{Digital Rainfall Coordinator}
+        \begin{highlights}
+            \item Managed encryption of unpredictable drizzle data
+        \end{highlights}
+    \end{onecolentry}
+    
+    \vspace{0.05 cm}
+    
+    \section{References}
+    
+    \begin{onecolentry}
+        \textbf{Prof. Marsh Mellow, Ph.D.}
+    
+        \textit{Senior Waffle Engineer, Department of Syrup Systems, University of Fluffology}
+    
+        \text{Contact: marsh.mellow@fluffuniv.gloop}
+    \end{onecolentry}
+    
+    \vspace{0.2 cm}
+    
+    \begin{onecolentry}
+        \textbf{Dr. Nimbus Wafflebyte, Ph.D.}
+    
+        \textit{Dean of Chaotic Sandwich Theory, Institute of Abstract Digestibles}
+    
+        \text{Contact: Wafflebyte.nimbus@digest.due}
+    \end{onecolentry}
+    
+    \vspace{0.2 cm}
+    
+    \vspace{0.05 cm}
+    
+    \end{document}
